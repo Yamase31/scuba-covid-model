@@ -1,0 +1,270 @@
+{UTF-8}
+American Population=
+	3e+08
+	~	people
+	~		|
+
+Deaths= INTEG (
+	Dying,
+		0)
+	~	
+	~		|
+
+Init Population=
+	American Population - Underlying Init Population
+	~	people
+	~		|
+
+Underlying Deaths= INTEG (
+	Underlying Dying,
+		0)
+	~	
+	~		|
+
+Fraction with Cardiovascular Issues=
+	0.094 + 0.48 + 0.064
+	~	
+	~		|
+
+Underlying Init Population=
+	American Population * Fraction with Cardiovascular Issues
+	~	people
+	~		|
+
+Underlying Infecting=
+	Underlying Susceptible * Infection Rate
+	~	
+	~		|
+
+Recovered= INTEG (
+	Recovering,
+		0)
+	~	
+	~		|
+
+Underlying Recovered= INTEG (
+	Underlying Recovering,
+		0)
+	~	
+	~		|
+
+Underlying Dying=
+	Underlying Infected * Underlying Fatality Rate
+	~	
+	~		|
+
+Infected= INTEG (
+	Infecting - (Recovering + Dying),
+		0)
+	~	
+	~		|
+
+Underlying Infected= INTEG (
+	Underlying Infecting - (Underlying Recovering + Underlying Dying),
+		0)
+	~	
+	~		|
+
+Infecting=
+	Susceptible * Infection Rate
+	~	
+	~		|
+
+Underlying Percentage in Quarantine=
+	0.75
+	~	
+	~		|
+
+Underlying Fatality Rate=
+	0.096
+	~	
+	~		|
+
+Susceptible= INTEG (
+	-Infecting,
+		Susceptible Population)
+	~	
+	~		|
+
+Underlying Susceptible = INTEG (
+	-Underlying Infecting,
+		Susceptible Population 0)
+	~	
+	~		|
+
+Underlying Recovering=
+	Underlying Infected * (1 - Underlying Fatality Rate)
+	~	
+	~		|
+
+Susceptible Population 0=
+	Underlying Init Population * (1 - Underlying Percentage in Quarantine)
+	~	
+	~		|
+
+Dying=
+	Infected * Fatality Rate
+	~	
+	~		|
+
+Recovering=
+	Infected * (1 - Fatality Rate)
+	~	
+	~		|
+
+Fatality Rate=
+	0.013
+	~	
+	~		|
+
+Susceptible Population=
+	Init Population * (1 - Percentage in Quarantine)
+	~	
+	~		|
+
+Infection Rate=
+	0.0048
+	~	
+	~		|
+
+Percentage in Quarantine=
+	0.75
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 700
+	~	Day
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Day
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Day [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Day [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|255-255-0|-1--1--1|255-255-255|96,96,100,0
+10,1,Init Population,134,165,51,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Percentage in Quarantine,316,167,47,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Susceptible,234,363,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Infected,782,361,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Deaths,1078,257,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Recovered,1080,365,40,20,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,7,9,6,4,0,0,22,0,0,0,-1--1--1,,1|(987,363)|
+1,8,9,4,100,0,0,22,0,0,0,-1--1--1,,1|(870,363)|
+11,9,662,926,363,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,10,Recovering,926,384,40,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,13,5,4,0,0,22,0,0,0,-1--1--1,,1|(917,253)|
+1,12,13,4,100,0,0,22,0,0,0,-1--1--1,,1|(789,302)|
+11,13,332,789,253,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,14,Dying,789,275,23,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,Fatality Rate,988,163,44,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,16,15,14,0,0,0,0,0,64,0,-1--1--1,,1|(894,216)|
+1,17,15,10,0,0,0,0,0,64,0,-1--1--1,,1|(958,266)|
+10,18,Infection Rate,502,515,48,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,19,4,10,1,0,0,0,0,64,0,-1--1--1,,1|(836,437)|
+1,20,4,14,1,0,0,0,0,64,0,-1--1--1,,1|(737,320)|
+12,21,0,603,58,39,11,8,7,0,0,-1,0,0,0,-1,-1,0,0,0,0
+COVID 19
+10,22,Susceptible Population,226,257,76,11,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,23,1,22,0,0,0,0,0,64,0,-1--1--1,,1|(175,207)|
+1,24,2,22,0,0,0,0,0,64,0,-1--1--1,,1|(271,212)|
+1,25,22,3,0,0,0,0,0,64,1,-1--1--1,,1|(228,298)|
+1,26,28,4,4,0,0,22,0,0,0,-1--1--1,,1|(630,362)|
+1,27,28,3,100,0,0,22,0,0,0,-1--1--1,,1|(390,362)|
+11,28,530,513,362,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,29,Infecting,513,381,31,11,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,3,29,1,0,0,0,0,64,0,-1--1--1,,1|(364,419)|
+1,31,18,29,0,0,0,0,0,64,0,-1--1--1,,1|(506,454)|
+10,32,Underlying Init Population,151,555,55,20,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,33,Underlying Percentage in Quarantine,332,556,45,27,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,34,Underlying Susceptible,249,750,44,17,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,35,Underlying Infected,801,757,38,26,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,36,Underlying Deaths,1100,652,39,19,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+10,37,Underlying Recovered,1099,755,46,20,3,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,38,40,37,4,0,0,22,0,0,0,-1--1--1,,1|(1000,744)|
+1,39,40,35,100,0,0,22,0,0,0,-1--1--1,,1|(885,744)|
+11,40,596,940,744,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,41,Underlying Recovering,940,777,54,22,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,42,44,36,4,0,0,22,0,0,0,-1--1--1,,1|(936,634)|
+1,43,44,35,100,0,0,22,0,0,0,-1--1--1,,1|(803,688)|
+11,44,398,803,634,8,11,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,45,Underlying Dying,803,666,37,21,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,Underlying Fatality Rate,1006,554,50,21,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,47,46,45,0,0,0,0,0,64,0,-1--1--1,,1|(910,606)|
+1,48,46,41,0,0,0,0,0,64,0,-1--1--1,,1|(975,658)|
+1,49,35,41,1,0,0,0,0,64,0,-1--1--1,,1|(850,818)|
+1,50,35,45,1,0,0,0,0,64,0,-1--1--1,,1|(751,701)|
+10,51,Susceptible Population 0,240,638,41,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+1,52,32,51,0,0,0,0,0,64,0,-1--1--1,,1|(190,592)|
+1,53,33,51,0,0,0,0,0,64,0,-1--1--1,,1|(286,596)|
+1,54,51,34,0,0,0,0,0,64,1,-1--1--1,,1|(243,688)|
+1,55,57,35,4,0,0,22,0,0,0,-1--1--1,,1|(648,743)|
+1,56,57,34,100,0,0,22,0,0,0,-1--1--1,,1|(407,743)|
+11,57,552,527,743,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,58,Underlying Infecting,527,769,48,18,40,131,0,0,-1,0,0,0,0,0,0,0,0,0
+1,59,34,58,1,0,0,0,0,64,0,-1--1--1,,1|(378,800)|
+12,60,0,616,232,40,40,2,135,0,36,-1,0,0,0,-1--1--1,0-128-255,Papyrus|0||0-0-0,0,0,0,0,0,0
+Healthy
+12,61,0,655,628,58,58,2,135,0,32,-1,0,0,0,-1--1--1,0-0-0,Papyrus|0||0-0-0,0,0,0,0,0,0
+Underlying Conditions
+12,62,0,328,489,40,20,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,63,American Population,85,381,34,19,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Fraction with Cardiovascular Issues,203,466,62,26,8,131,0,0,0,0,0,0,0,0,0,0,0,0
+1,65,63,32,0,0,0,0,0,64,0,-1--1--1,,1|(115,460)|
+1,66,64,32,0,0,0,0,0,64,0,-1--1--1,,1|(178,507)|
+1,67,32,1,0,0,0,0,0,64,0,-1--1--1,,1|(142,362)|
+1,68,63,1,0,0,0,0,0,64,0,-1--1--1,,1|(108,275)|
+1,69,18,58,0,0,0,0,0,64,0,-1--1--1,,1|(513,631)|
+///---\\\
+:L<%^E!@
+1:Current 2.vdfx
+1:Current.vdfx
+9:Current 2
+23:0
+15:0,0,0,0,0,0
+19:100,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+4:Time
+5:Recovered
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:4
+41:0
+76:0
+77:0
+78:0
+79:0
+80:0
+81:0
+24:0
+25:700
+26:700
+75:
+43:

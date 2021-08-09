@@ -1,1 +1,1 @@
-# scuba-model
+# scuba-covid-model
